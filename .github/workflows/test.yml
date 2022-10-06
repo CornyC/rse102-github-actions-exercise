@@ -25,6 +25,7 @@ jobs:
         with:
           python-version: '3.8.10'
       - run: pip install pytest
+      - run: pip install numpy matplotlib
       - run: python -m pytest
   coverage_report:
     runs-on: ubuntu-latest
