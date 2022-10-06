@@ -5,25 +5,28 @@ jobs:
     runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
-- uses: actions/setup-node@v2
-        with:
-        node-version: '14'
+        - uses: actions/setup-node@v2
+          with:
+          node-version: '14'
   style_check:
-    steps:
-      - run: pip install black
-      - run: python -m black --check .
+    runs-on: ubuntu-latest
+      steps:
+        - run: pip install black
+        - run: python -m black --check .
   test:
-    steps:
-      - run: pip install pytest
-      - run: python -m pytest
+    runs-on: ubuntu-latest
+      steps:
+        - run: pip install pytest
+        - run: python -m pytest
   coverage_report:
-    steps:
-      - run: pip install coverage
-      - run: coverage report -m pytest
-      - run: coverage xml pytest
-      - name: "upload coverage"
-      - uses: actions/upload-artifact@v2
-        with:
-          name: coverage_result
-          path: coverage.xml
-          retention-days: 14
+    runs-on: ubuntu-latest
+      steps:
+        - run: pip install coverage
+        - run: coverage report -m pytest
+        - run: coverage xml pytest
+        - name: "upload coverage"
+        - uses: actions/upload-artifact@v2
+          with:
+            name: coverage_result
+            path: coverage.xml
+            retention-days: 14
