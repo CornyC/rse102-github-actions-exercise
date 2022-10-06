@@ -11,20 +11,31 @@ jobs:
   style_check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.10'
       - run: pip install black
       - run: python -m black --check .
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.10'
       - run: pip install pytest
       - run: python -m pytest
   coverage_report:
     runs-on: ubuntu-latest
     steps:
-      - run: pip install coverage
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.10'
+      - run: pip install coverage pytest
       - run: coverage report -m pytest
       - run: coverage xml pytest
-      - name: "upload coverage"
       - uses: actions/upload-artifact@v2
         with:
           name: coverage_result
